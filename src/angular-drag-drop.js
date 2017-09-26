@@ -29,6 +29,7 @@ mod.factory('dragContext', [function() {
 mod.run(['$document', '$rootElement', '$timeout', function ($document, $rootElement, $timeout) {
     $rootElement[0].addEventListener('dragend', onDragEnd, true);
     $rootElement[0].addEventListener('drop', onDrop, true);
+    $rootElement[0].addEventListener('dragstart', onDragStart, true);
 
     loadStyles(stylesheet, $document[0]);
 
@@ -39,6 +40,10 @@ mod.run(['$document', '$rootElement', '$timeout', function ($document, $rootElem
 
     function onDrop() {
         clearDragActive();
+    }
+
+    function onDragStart(event) {
+        event.dataTransfer.effectAllowed = 'move';
     }
 
     function clearDragActive() {
@@ -118,7 +123,7 @@ mod.directive('dragContainer', ['$rootElement', '$parse', '$timeout', 'dragConte
                         onDragStart($scope, locals);
                     });
                 }
-                
+
                 var targetEvent = e.originalEvent || e;
 
                 if (targetEvent.dataTransfer) {

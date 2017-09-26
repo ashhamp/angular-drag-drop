@@ -52,7 +52,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var Angular = __webpack_require__(1);
 
@@ -85,6 +85,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	mod.run(['$document', '$rootElement', '$timeout', function ($document, $rootElement, $timeout) {
 	    $rootElement[0].addEventListener('dragend', onDragEnd, true);
 	    $rootElement[0].addEventListener('drop', onDrop, true);
+	    $rootElement[0].addEventListener('dragstart', onDragStart, true);
 
 	    loadStyles(stylesheet, $document[0]);
 
@@ -95,6 +96,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    function onDrop() {
 	        clearDragActive();
+	    }
+
+	    function onDragStart(event) {
+	        event.dataTransfer.effectAllowed = 'move';
 	    }
 
 	    function clearDragActive() {
@@ -174,7 +179,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        onDragStart($scope, locals);
 	                    });
 	                }
-	                
+
 	                var targetEvent = e.originalEvent || e;
 
 	                if (targetEvent.dataTransfer) {
@@ -496,13 +501,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
 
-/***/ }
+/***/ })
 /******/ ])
 });
 ;
