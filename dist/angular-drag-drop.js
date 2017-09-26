@@ -86,6 +86,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    $rootElement[0].addEventListener('dragend', onDragEnd, true);
 	    $rootElement[0].addEventListener('drop', onDrop, true);
 	    $rootElement[0].addEventListener('dragstart', onDragStart, true);
+	    $rootElement[0].addEventListener('dragover', onDragOver, true);
 
 	    loadStyles(stylesheet, $document[0]);
 
@@ -100,6 +101,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    function onDragStart(event) {
 	        event.dataTransfer.effectAllowed = 'move';
+	    }
+
+	    function onDragOver(event) {
+	        event.dataTransfer.dragEffect = 'move';
 	    }
 
 	    function clearDragActive() {
