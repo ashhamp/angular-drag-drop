@@ -29,8 +29,8 @@ mod.factory('dragContext', [function() {
 mod.run(['$document', '$rootElement', '$timeout', function ($document, $rootElement, $timeout) {
     $rootElement[0].addEventListener('dragend', onDragEnd, true);
     $rootElement[0].addEventListener('drop', onDrop, true);
-    $rootElement[0].addEventListener('dragstart', setDragEffect, true);
-    $rootElement[0].addEventListener('dragover', setDragEffect, true);
+    $rootElement[0].addEventListener('dragstart', onDragStart, true);
+    $rootElement[0].addEventListener('dragover', onDragOver, true);
 
     loadStyles(stylesheet, $document[0]);
 
@@ -43,7 +43,12 @@ mod.run(['$document', '$rootElement', '$timeout', function ($document, $rootElem
         clearDragActive();
     }
 
-    function setDragEffect(event) {
+    function onDragStart(event) {
+        event.dataTransfer.effectAllowed = 'move';
+        event.dataTransfer.dragEffect = 'move';
+    }
+
+    function onDragOver(event) {
         event.dataTransfer.dragEffect = 'move';
     }
 
